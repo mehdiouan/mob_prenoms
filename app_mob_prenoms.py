@@ -52,13 +52,17 @@ if st.button("Vérifier"):
         if not details_trouves:
             st.success(f"Résultat pour {nom_affichage}")
             st.balloons()
-            st.header("✨ Score : EXCELLENT")
+            st.header("✨ Fréquence : 0 fois sur 10 ans")
             st.write("Ce prénom n'est jamais apparu dans le Top 100 sur les 10 dernières années.")
+            st.info("C'est un score d'originalité excellent.")
         else:
             # Calculs
             liste_rangs = [d[0] for d in details_trouves]
             moyenne = sum(liste_rangs) / len(liste_rangs)
             meilleur_rang, meilleure_annee = min(details_trouves)
+            
+            # Compteur brut
+            nb_annees_presence = len(details_trouves)
 
             # Couleur selon originalité
             if moyenne <= 10: 
@@ -66,7 +70,7 @@ if st.button("Vérifier"):
                 couleur = "red"
             elif 10 < moyenne <= 50:
                 niveau = "Passable"
-                couleur = "orange"
+                couleur = "brown"
             elif 50 < moyenne <= 80:
                 niveau = "Acceptable"
                 couleur = "orange"
@@ -79,10 +83,14 @@ if st.button("Vérifier"):
             
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric(label="Années Top 100", value=f"{len(details_trouves)} / 10")
+                # --- MODIFICATION ICI ---
+                st.metric(label="Fréquence (10 ans)", value=f"{nb_annees_presence} fois sur 10 ans")
             with col2:
                 st.metric(label="Moyenne", value=f"{moyenne:.1f}")
             with col3:
                 st.metric(label="Meilleur", value=f"{meilleur_rang} ({meilleure_annee})")
+
+            # Phrase de précision explicite
+            st.caption(f"ℹ️ Précision : Ce prénom a figuré dans le Top 100 pendant {nb_annees_presence} années entre 2015 et 2024.")
 
             st.markdown(f"#### Score d'originalité : :{couleur}[{niveau}]")
