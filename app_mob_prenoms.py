@@ -69,7 +69,7 @@ if st.button("Vérifier"):
                 couleur = "orange"
             elif 50 < moyenne <= 80:
                 niveau = "Acceptable"
-                couleur = "gold" # Streamlit n'a pas "brown" mais "gold" marche bien
+                couleur = "orange"
             else:
                 niveau = "Satisfaisant"
                 couleur = "blue"
