@@ -70,10 +70,10 @@ if st.button("Vérifier"):
                 couleur = "red"
             elif 10 < moyenne <= 50:
                 niveau = "Passable"
-                couleur = "brown"
+                couleur = "orange"
             elif 50 < moyenne <= 80:
                 niveau = "Acceptable"
-                couleur = "orange"
+                couleur = "yellow"
             else:
                 niveau = "Satisfaisant"
                 couleur = "blue"
