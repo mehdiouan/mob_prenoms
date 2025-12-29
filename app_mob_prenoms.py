@@ -160,7 +160,7 @@ if st.button("Vérifier l'originalité"):
                 couleur = "orange"
             elif 50 < moyenne <= 80:
                 niveau = "Acceptable"
-                couleur = "gold"
+                couleur = "yellow"
             else:
                 niveau = "Satisfaisant"
                 couleur = "blue"
