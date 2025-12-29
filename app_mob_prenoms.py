@@ -2,6 +2,93 @@ import streamlit as st
 import unicodedata
 import re
 
+# --- CONFIGURATION DE LA PAGE (Design) ---
+st.set_page_config(page_title="Testeur d'Originalité", layout="centered")
+
+# --- CSS PERSONNALISÉ (Pour le design Papyrus & Calligraphie) ---
+st.markdown("""
+<style>
+    /* Import des polices Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+
+    /* Style du petit titre "Test d'originalité" */
+    .sub-title {
+        font-family: 'Merriweather', serif;
+        font-size: 1.2rem;
+        color: #555;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: -10px;
+    }
+
+    /* Style du titre Calligraphie "Prénoms" */
+    .cali-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 5rem;
+        color: #c5a059; /* Couleur Or/Bronze */
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        line-height: 1.2;
+    }
+
+    /* Les traits décoratifs autour du titre */
+    .separator-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+    .line {
+        height: 2px;
+        width: 50px;
+        background-color: #c5a059;
+        margin: 0 15px;
+    }
+
+    /* Style du "Papyrus" (Boîte de description) */
+    .papyrus {
+        background-color: #fdf6e3; /* Couleur parchemin clair */
+        border: 2px solid #e6d2b5; /* Bordure plus foncée */
+        border-radius: 8px; /* Coins légèrement arrondis */
+        padding: 25px;
+        text-align: center;
+        font-family: 'Merriweather', serif;
+        font-size: 1rem;
+        color: #4a4a4a;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.05); /* Ombre douce */
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+    
+    /* Centrer le bouton */
+    .stButton button {
+        width: 100%;
+        background-color: #c5a059;
+        color: white;
+        border: none;
+    }
+    .stButton button:hover {
+        background-color: #b08d48;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# --- AFFICHAGE DE L'EN-TÊTE (Design PDF) ---
+st.markdown("""
+    <div class="sub-title">Test d'originalité</div>
+    <div class="separator-box">
+        <div class="line"></div>
+        <div class="cali-title">Prénoms</div>
+        <div class="line"></div>
+    </div>
+    <div class="papyrus">
+        Vérifiez si le prénom que vous souhaitez donner à votre futur enfant fait partie (ou non) des 100 prénoms les plus donnés en France depuis 10 ans.
+    </div>
+""", unsafe_allow_html=True)
+
 # --- 1. FONCTION INTELLIGENTE ---
 def signature_prenom(texte):
     if not texte: return ""
