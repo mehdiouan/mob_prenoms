@@ -76,19 +76,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- AFFICHAGE DE L'EN-TÊTE (Design PDF) ---
-st.markdown("""
-    <div class="sub-title">Test d'originalité</div>
-    <div class="separator-box">
-        <div class="line"></div>
-        <div class="cali-title">Prénoms</div>
-        <div class="line"></div>
-    </div>
-    <div class="papyrus">
-        Vérifiez si le prénom que vous souhaitez donner à votre futur enfant fait partie (ou non) des 100 prénoms les plus donnés en France depuis 10 ans.
-    </div>
-""", unsafe_allow_html=True)
-
 # --- 1. FONCTION INTELLIGENTE ---
 def signature_prenom(texte):
     if not texte: return ""
@@ -113,13 +100,26 @@ base_donnees = {
     2015: ["Gabriel", "Jules", "Raphaël", "Léo", "Lucas", "Louis", "Louise", "Adam", "Emma", "Hugo", "Ethan", "Jade", "Chloé", "Inès", "Nathan", "Arthur", "Léa", "Paul", "Manon", "Nolan", "Timéo", "Maël", "Théo", "Lina", "Léna", "Lola", "Sacha", "Tom", "Zoé", "Noah", "Gabin", "Mohamed", "Mathis", "Sarah", "Anna", "Lucie", "Mila", "Juliette", "Rose", "Axel", "Ambre", "Noé", "Baptiste", "Eva", "Louna", "Aaron", "Martin", "Elena", "Antoine", "Victor", "Yanis", "Maëlys", "Rayan", "Jeanne", "Mathéo", "Valentin", "Clara", "Robin", "Nina", "Evan", "Louane", "Léonie", "Maxence", "Lou", "Lilou", "Alexandre", "Inaya", "Eden", "Clémence", "Margaux", "Charlotte", "Naël", "Marius", "Mia", "Lenny", "Agathe", "Adèle", "Simon", "Alexis", "Samuel", "Léon", "Elsa", "Lana", "Tiago", "Sofia", "Rafaël", "Léana", "Elise", "Olivia", "Kaïs", "Gaspard", "Mathilde", "Alicia", "Margot", "Esteban", "Noémie", "Ilyès", "Eliott", "Giulia", "Aya"]
 }
 
-# --- 3. INTERFACE WEB (STREAMLIT) ---
-st.title("👶 Testeur d'Originalité")
-st.write("Vérifiez si un prénom fait partie du Top 100 en France (2015-2024).")
+# --- 3. INTERFACE WEB (Design + Logique) ---
 
-prenom_saisi = st.text_input("Entrez un prénom :", "")
+# AFFICHAGE DU TITRE (HTML/CSS)
+st.markdown("""
+    <div class="sub-title">Test d'originalité</div>
+    <div class="separator-box">
+        <div class="line"></div>
+        <div class="cali-title">Prénoms</div>
+        <div class="line"></div>
+    </div>
+    <div class="papyrus">
+        Vérifiez si le prénom que vous souhaitez donner à votre futur enfant fait partie (ou non) des 100 prénoms les plus donnés en France depuis 10 ans.
+    </div>
+""", unsafe_allow_html=True)
 
-if st.button("Vérifier"):
+# CHAMP DE SAISIE
+prenom_saisi = st.text_input("Saisir un prénom :", "")
+
+# BOUTON ET RÉSULTAT
+if st.button("Vérifier l'originalité"):
     if prenom_saisi:
         signature_saisie = signature_prenom(prenom_saisi)
         nom_officiel_trouve = "" 
@@ -160,7 +160,7 @@ if st.button("Vérifier"):
                 couleur = "orange"
             elif 50 < moyenne <= 80:
                 niveau = "Acceptable"
-                couleur = "yellow"
+                couleur = "gold"
             else:
                 niveau = "Satisfaisant"
                 couleur = "blue"
@@ -170,7 +170,6 @@ if st.button("Vérifier"):
             
             col1, col2, col3 = st.columns(3)
             with col1:
-                # --- MODIFICATION ICI ---
                 st.metric(label="Fréquence (10 ans)", value=f"{nb_annees_presence} fois sur 10 ans")
             with col2:
                 st.metric(label="Moyenne", value=f"{moyenne:.1f}")
